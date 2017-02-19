@@ -1,0 +1,70 @@
+
+<nav class="navbar navbar-default navbar-fixed-top nav-positioning">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse nav-menu-positiong">
+      <ul class="nav navbar-nav">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{selectedCampaigns}}<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a id='all' (click)="selectCamp($event, null)"  href="#">All Campaigns</a></li>
+          	<li *ngFor="let campaign of campaigns">
+          		<a (click)="selectCamp($event, campaign)" href="#" [attr.id]="campaign.id">{{campaign.campaignName}}</a>
+          	</li>
+          </ul>
+        </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li></li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div>
+</nav>
+
+<div class="content-cover">
+	<div class="content-area-align">
+		<div class="card-deck">
+		<ng-container *ngFor="let card of cards">
+		<div *ngIf=" card.campaignId === selectedCampaignId || selectedCampaignId === 'all' " class="card">
+		    <img class="card-img-top" src={{card.primaryMediaUrl}} alt="Card image cap">
+		    <div class="dw-menu">
+				<div class="dropdown">
+				  <li class="dropbtn fa fa-pencil"></li>
+				  <div class="dropdown-content">
+				    <a href="#"><li class="fa fa-trash-o">   Link 1</li></a>
+				    <a href="#"><li class="fa fa-edit">    Link 2</li></a>
+				  </div>
+				</div>
+			</div>
+		    <div class="card-block">
+		      <p>{{card.cardDescription}}</p>
+		    </div>
+		    <div class="pricing">
+		    	<span class="price">{{card.listOfPlans[0].price.amount | currency :  card.listOfPlans[0].price.currency }}</span>
+		    	<span class="state">
+		    		<li>{{card.currentWorkflow}}</li>
+		    		<li></li>
+		    	</span>
+		    </div>
+		    <div class="card-footer">
+		      <ul>
+		      	<li class="fa fa-database">{{card.likes}}</li>
+		      	<li class="fa fa-users">{{card.shares}}</li>
+		      	<li class="fa fa-eye">{{card.views}}</li>
+		      </ul>
+		    </div>
+		</div>
+		</ng-container>
+		  <div class="newCard">
+		    <div class="addNewBtn">+</div>
+		    <p>Create new Card.</p>
+		</div>
+	</div>
+</div>
